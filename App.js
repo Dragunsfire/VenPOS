@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Toaster } from 'sonner-native';
+import HomeScreen from "./screens/HomeScreen";
+import WelcomeScreen from './screens/WelcomeScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler'; // Importa GestureHandlerRootView
+
+
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider style={styles.container}>
+      <GestureHandlerRootView style={{ flex: 1 }}>{/* Envuelve NavigationContainer y Toaster con GestureHandlerRootView */}
+        <NavigationContainer>
+          <RootStack />
+          <Toaster />
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    userSelect: "none"
+  }
 });
