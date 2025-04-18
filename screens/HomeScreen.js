@@ -1,31 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { toast } from 'sonner-native';
-import WelcomeScreen from './WelcomeScreen';
+import { supabase } from '../utils/supabase';
 
-// ¡CORRECCIÓN! - El nombre del componente debe comenzar con una letra mayúscula
 export default function HomeScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       toast.error('Por favor complete todos los campos');
       return;
     }
 
-    // Mock authentication - replace with your actual auth logic
-    if (email === 'a@gmail.com' && password === '123456') {
-      toast.success('Inicio de sesión exitoso');
-      console.log('Credenciales correctas, navegando a Welcome');
-      navigation.navigate('Welcome', { userName: 'Wilfredo' });
-    } else {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
       toast.error('Credenciales inválidas');
-      console.log('Credenciales incorrectas');
+      console.log('❌ Error de login:', error.message);
+    } else {
+      toast.success('Inicio de sesión exitoso');
+      console.log('✅ Login exitoso:', data);
+      navigation.navigate('Welcome', { userName: 'Wilfredo' });
     }
   };
+
+  // DEBUG DE CONEXIÓN A SUPABASE
+  useEffect(() => {
+    const testConnection = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.log('❌ Error al obtener sesión:', error.message);
+      } else {
+        console.log('✅ Supabase conectado. Sesión:', data);
+      }
+    };
+    testConnection();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,42 +1,47 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet } from 'react-native';
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Toaster } from 'sonner-native';
-import HomeScreen from "./screens/HomeScreen";
-import WelcomeScreen from './screens/WelcomeScreen';
-import { GestureHandlerRootView } from 'react-native-gesture-handler'; // Importa GestureHandlerRootView
+import React, { useEffect } from 'react';
+import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import { supabase } from './utils/supabase'; // Asegúrate de tener la importación correcta de tu archivo supabase.js
 
+const App = () => {
+  useEffect(() => {
+    // Ejecutar la función select_2_plus_2 desde Supabase
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .rpc('select_2_plus_2'); // Llamar a la función RPC creada en Supabase
 
-const Stack = createNativeStackNavigator();
+        if (error) {
+          console.error('Error ejecutando la función:', error);
+        } else {
+          console.log('Resultado de 2 + 2:', data[0].result);
+        }
+      } catch (error) {
+        console.error('Error de conexión o ejecución:', error);
+      }
+    };
 
-function RootStack() {
+    fetchData();
+  }, []); // Se ejecuta una vez cuando se monta el componente
+
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false
-    }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-    </Stack.Navigator>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Conexión a Supabase</Text>
+    </SafeAreaView>
   );
-}
-
-export default function App() {
-  return (
-    <SafeAreaProvider style={styles.container}>
-      <GestureHandlerRootView style={{ flex: 1 }}>{/* Envuelve NavigationContainer y Toaster con GestureHandlerRootView */}
-        <NavigationContainer>
-          <RootStack />
-          <Toaster />
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
-  );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    userSelect: "none"
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+  },
 });
+
+export default App;

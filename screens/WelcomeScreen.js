@@ -1,32 +1,38 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function WelcomeScreen({ route }) {
-  const { userName } = route.params; 
+  const { userName } = route.params || {};
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcomeText}>¡Hola, {userName}!</Text>
-      <Text style={styles.message}>Bienvenido a la aplicación.</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.welcomeContainer}>
+        <Text style={styles.welcomeText}>¡Hola, {userName || 'Usuario'}! 👋</Text>
+        <Text style={styles.subText}>Has iniciado sesión correctamente.</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#007AFF',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+  },
+  welcomeContainer: {
+    alignItems: 'center',
   },
   welcomeText: {
     fontSize: 28,
+    color: 'white',
     fontWeight: 'bold',
-    color: '#333',
   },
-  message: {
+  subText: {
     fontSize: 16,
-    color: '#666',
+    color: 'white',
     marginTop: 10,
   },
 });
