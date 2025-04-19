@@ -11,30 +11,46 @@ export default function HomeScreen({ navigation }) {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      toast.error('Por favor complete todos los campos');
+      toast.error('Por favor completa todos los campos');
       return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
-      toast.error('Credenciales inválidas');
-      console.log('❌ Error de login:', error.message);
+      toast.error('Correo o contraseña incorrectos');
+      console.log('❌ Error:', error.message);
     } else {
-      toast.success('Inicio de sesión exitoso');
-      console.log('✅ Login exitoso:', data);
-      navigation.navigate('Welcome', { userName: 'Wilfredo' });
+      const userEmail = data.user.email;
+      toast.success(`Bienvenido ${userEmail}`);
+      console.log('✅ Usuario autenticado:', data.user);
+      navigation.navigate('Welcome', { userEmail });
     }
   };
 
-  // DEBUG DE CONEXIÓN A SUPABASE
+  // DEBUG DE CONEXIÓN A SUPABASE Y PRUEBA DE RPC
   useEffect(() => {
     const testConnection = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.log('❌ Error al obtener sesión:', error.message);
-      } else {
-        console.log('✅ Supabase conectado. Sesión:', data);
+      try {
+        // Verificar sesión
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) {
+          console.log('❌ Error al obtener sesión:', sessionError.message);
+        } else {
+          console.log('✅ Supabase conectado. Sesión:', sessionData);
+        }
+        // Llamar función RPC
+        const { data: rpcData, error: rpcError } = await supabase.rpc('select_2_plus_2');
+        if (rpcError) {
+          console.error('❌ Error ejecutando select_2_plus_2:', rpcError.message);
+        } else {
+          console.log('📊 Resultado de select_2_plus_2:', rpcData[0]?.result);
+        }
+      } catch (error) {
+        console.error('⚠️ Error general:', error);
       }
     };
     testConnection();
@@ -75,6 +91,14 @@ export default function HomeScreen({ navigation }) {
 
           <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Enlace para ir a registro */}
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>¿No tienes cuenta?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.signUpLink}>Regístrate aquí</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -142,6 +166,19 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: 'white',
     fontSize: 18,
+    fontWeight: '600',
+  },
+  signUpContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  signUpText: {
+    color: '#666',
+    marginRight: 5,
+  },
+  signUpLink: {
+    color: '#007AFF',
     fontWeight: '600',
   },
 });

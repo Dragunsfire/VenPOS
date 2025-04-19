@@ -1,47 +1,38 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
-import { supabase } from './utils/supabase'; // Asegúrate de tener la importación correcta de tu archivo supabase.js
+// App.js
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Toaster } from 'sonner-native';
 
-const App = () => {
-  useEffect(() => {
-    // Ejecutar la función select_2_plus_2 desde Supabase
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .rpc('select_2_plus_2'); // Llamar a la función RPC creada en Supabase
+import HomeScreen from './screens/HomeScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 
-        if (error) {
-          console.error('Error ejecutando la función:', error);
-        } else {
-          console.log('Resultado de 2 + 2:', data[0].result);
-        }
-      } catch (error) {
-        console.error('Error de conexión o ejecución:', error);
-      }
-    };
+const Stack = createNativeStackNavigator();
 
-    fetchData();
-  }, []); // Se ejecuta una vez cuando se monta el componente
-
+export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Conexión a Supabase</Text>
-    </SafeAreaView>
+    <SafeAreaProvider style={styles.container}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          </Stack.Navigator>
+          <Toaster />
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#333',
+    userSelect: 'none',
   },
 });
-
-export default App;
