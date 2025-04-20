@@ -1,4 +1,4 @@
-// App.js
+
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,8 +10,10 @@ import { Toaster } from 'sonner-native';
 
 import HomeScreen from './screens/HomeScreen';
 import SignUpScreen from './screens/SignUpScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import SellScreen from './screens/SellScreen';
+import CartScreen from './screens/CartScreen'; 
+import ProductSelectionScreen from './screens/ProductSelectionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +26,9 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
-            
+            <Stack.Screen name="SellScreen" component={SellScreen} />
+            <Stack.Screen name="CartScreen" component={CartScreen} />
+            <Stack.Screen name="ProductSelectionScreen" component={ProductSelectionScreen} />
           </Stack.Navigator>
           <Toaster />
         </NavigationContainer>

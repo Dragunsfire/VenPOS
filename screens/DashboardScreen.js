@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LineChart } from 'react-native-chart-kit';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [selectedCurrency, setSelectedCurrency] = useState('VES');
   const exchangeRate = 80.90;
 
   const operator = {
     name: 'Wilfredo Garcia',
-    role: 'cajero Principal',
+    role: 'Cajero Principal',
     id: 'OP001',
   };
 
@@ -67,60 +76,15 @@ export default function HomeScreen() {
   ];
 
   const mainMenuItems = [
-    {
-      title: 'Nueva Venta',
-      icon: 'cart-plus',
-      color: '#4CAF50',
-      route: 'NewSale',
-    },
-    {
-      title: 'Carrito',
-      icon: 'cart',
-      color: '#E91E63',
-      route: 'Cart',
-    },
-    {
-      title: 'Clientes',
-      icon: 'account-group',
-      color: '#795548',
-      route: 'Customers',
-    },
-    {
-      title: 'Inventario',
-      icon: 'package-variant',
-      color: '#2196F3',
-      route: 'Inventory',
-    },
-    {
-      title: 'Categorías',
-      icon: 'shape',
-      color: '#9C27B0',
-      route: 'Categories',
-    },
-    {
-      title: 'Cierre de Caja',
-      icon: 'cash-register',
-      color: '#FF9800',
-      route: 'CashClose',
-    },
-    {
-      title: 'Reportes',
-      icon: 'chart-bar',
-      color: '#607D8B',
-      route: 'Reports',
-    },
-    {
-      title: 'Configuración',
-      icon: 'cog',
-      color: '#455A64',
-      route: 'Settings',
-    },
-    {
-      title: 'Salir',
-      icon: 'logout',
-      color: '#F44336',
-      route: 'Logout', 
-    }
+    { title: 'Nueva Venta', icon: 'cart-plus', color: '#4CAF50', route: 'SellScreen' },
+    { title: 'Carrito', icon: 'cart', color: '#E91E63', route: 'CartScreen' },
+    { title: 'Clientes', icon: 'account-group', color: '#795548', route: 'Customers' },
+    { title: 'Inventario', icon: 'package-variant', color: '#2196F3', route: 'Inventory' },
+    { title: 'Categorías', icon: 'shape', color: '#9C27B0', route: 'Categories' },
+    { title: 'Cierre de Caja', icon: 'cash-register', color: '#FF9800', route: 'CashClose' },
+    { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'Reports' },
+    { title: 'Configuración', icon: 'cog', color: '#455A64', route: 'Settings' },
+    { title: 'Salir', icon: 'logout', color: '#F44336', route: 'Logout' },
   ];
 
   return (
@@ -206,7 +170,11 @@ export default function HomeScreen() {
 
         <View style={styles.menuGrid}>
           {mainMenuItems.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.menuItem}>
+            <TouchableOpacity
+              key={index}
+              style={styles.menuItem}
+              onPress={() => navigation.navigate(item.route)}
+            >
               <View style={[styles.menuIconContainer, { backgroundColor: item.color }]}>
                 {item.icon.includes('account') ? (
                   <MaterialIcons name={item.icon} size={32} color="white" />
