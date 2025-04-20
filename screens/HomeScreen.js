@@ -27,7 +27,8 @@ export default function HomeScreen({ navigation }) {
       const userEmail = data.user.email;
       toast.success(`Bienvenido ${userEmail}`);
       console.log('✅ Usuario autenticado:', data.user);
-      navigation.navigate('Welcome', { userEmail });
+      //navigation.navigate('Welcome', { userEmail });
+      navigation.navigate('Dashboard');
     }
   };
 

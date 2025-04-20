@@ -7,9 +7,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Toaster } from 'sonner-native';
 
+
 import HomeScreen from './screens/HomeScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +23,8 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            
           </Stack.Navigator>
           <Toaster />
         </NavigationContainer>
