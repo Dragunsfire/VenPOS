@@ -78,8 +78,8 @@ export default function HomeScreen() {
   const mainMenuItems = [
     { title: 'Nueva Venta', icon: 'cart-plus', color: '#4CAF50', route: 'SellScreen' },
     { title: 'Carrito', icon: 'cart', color: '#E91E63', route: 'CartScreen' },
-    { title: 'Clientes', icon: 'account-group', color: '#795548', route: 'Customers' },
-    { title: 'Inventario', icon: 'package-variant', color: '#2196F3', route: 'Inventory' },
+    { title: 'Clientes', icon: 'account-group', color: '#795548', route: 'NewCustomer' },
+    { title: 'Inventario', icon: 'package-variant', color: '#2196F3', route: 'InventoryScreen' },
     { title: 'Categorías', icon: 'shape', color: '#9C27B0', route: 'Categories' },
     { title: 'Cierre de Caja', icon: 'cash-register', color: '#FF9800', route: 'CashClose' },
     { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'Reports' },
