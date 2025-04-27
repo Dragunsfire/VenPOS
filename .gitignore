@@ -39,3 +39,6 @@ yarn-error.*
 
 # git
 .gitignore
+
+# Windsurf
+.windsurfrules

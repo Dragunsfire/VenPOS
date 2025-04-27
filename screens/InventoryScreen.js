@@ -44,7 +44,51 @@ export default function InventoryScreen({ navigation }) {
       cost: 25.50,
       minStock: 10,
     },
-    // ... más productos
+    {
+      id: '2',
+      name: 'Café Madrid',
+      price: 45.50,
+      category: '1',
+      stock: 30,
+      barcode: '7591001200097',
+      image: `https://api.a0.dev/assets/image?text=Cafe%20Madrid%20Venezuela&aspect=1:1`,
+      cost: 32.50,
+      minStock: 5,
+    },
+    {
+      id: '3',
+      name: 'Azúcar Montalbán',
+      price: 20.00,
+      category: '1',
+      stock: 80,
+      barcode: '7591001300096',
+      image: `https://api.a0.dev/assets/image?text=Azucar%20Montalban%20Venezuela&aspect=1:1`,
+      cost: 15.00,
+      minStock: 10,
+    },
+    {
+      id: '4',
+      name: 'Aceite Diana',
+      price: 50.00,
+      category: '2',
+      stock: 20,
+      barcode: '7591001400095',
+      image: `https://api.a0.dev/assets/image?text=Aceite%20Diana%20Venezuela&aspect=1:1`,
+      cost: 40.00,
+      minStock: 5,
+    },
+    {
+      id: '5',
+      name: 'Arroz Mary',
+      price: 30.00,
+      category: '1',
+      stock: 120,
+      barcode: '7591001500094',
+      image: `https://api.a0.dev/assets/image?text=Arroz%20Mary%20Venezuela&aspect=1:1`,
+      cost: 25.00,
+      minStock: 10,
+    },
+    
   ]);
 
   const formatCurrency = (amount, currency) => {
@@ -178,7 +222,7 @@ export default function InventoryScreen({ navigation }) {
 
       <TouchableOpacity 
         style={styles.addButton}
-        onPress={() => setShowNewProduct(true)}>
+        onPress={() => navigation.navigate('NewProductScreen')}>
         <MaterialCommunityIcons name="plus" size={24} color="white" />
       </TouchableOpacity>
 

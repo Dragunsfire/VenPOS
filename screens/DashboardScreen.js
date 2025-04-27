@@ -81,7 +81,7 @@ export default function HomeScreen() {
     { title: 'Clientes', icon: 'account-group', color: '#795548', route: 'NewCustomer' },
     { title: 'Inventario', icon: 'package-variant', color: '#2196F3', route: 'InventoryScreen' },
     { title: 'Categorías', icon: 'shape', color: '#9C27B0', route: 'Categories' },
-    { title: 'Cierre de Caja', icon: 'cash-register', color: '#FF9800', route: 'CashClose' },
+    { title: 'Cierre de Caja', icon: 'cash-register', color: '#FF9800', route: 'CashCloseScreen' },
     { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'Reports' },
     { title: 'Configuración', icon: 'cog', color: '#455A64', route: 'Settings' },
     { title: 'Salir', icon: 'logout', color: '#F44336', route: 'Logout' },
