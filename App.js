@@ -18,7 +18,9 @@ import InventoryScreen from './screens/InventoryScreen';
 import NewCustomerScreen from './screens/NewCustomerScreen';
 import NewProductScreen from './screens/NewProductScreen';
 import CashCloseScreen from './screens/CashCloseScreen';
-
+import SalesBookScreen from './screens/SalesBookScreen';
+import SuppliersScreen from './screens/SuppliersScreen';
+import NewSuplierScreen from './screens/NewSupliersScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +29,7 @@ export default function App() {
     <SafeAreaProvider style={styles.container}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
@@ -38,6 +40,9 @@ export default function App() {
             <Stack.Screen name="NewCustomer" component={NewCustomerScreen} />
             <Stack.Screen name="NewProductScreen" component={NewProductScreen} />
             <Stack.Screen name="CashCloseScreen" component={CashCloseScreen} />
+            <Stack.Screen name="SalesBookScreen" component={SalesBookScreen} />
+            <Stack.Screen name="SuppliersScreen" component={SuppliersScreen} />
+            <Stack.Screen name="NewSuplierScreen" component={NewSuplierScreen} />
           </Stack.Navigator>
           <Toaster />
         </NavigationContainer>
