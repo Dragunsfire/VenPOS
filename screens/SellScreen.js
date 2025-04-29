@@ -244,6 +244,19 @@ const renderProductSection = () => (
           <Text style={styles.finishOptionText}>Enviar por Email</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.section}>
+        <TouchableOpacity 
+          style={styles.finishOptionButton}
+          onPress={() => navigation.navigate('PaymentScreen', {
+            total: getTotal(),
+            currency: selectedCurrency,
+            client: selectedClient,
+            items: cartItems,
+          })}>
+          <MaterialCommunityIcons name="pago" size={32} color="white" />
+          <Text style={styles.finishOptionText}>Pagar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 

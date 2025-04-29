@@ -82,8 +82,9 @@ export default function HomeScreen() {
     { title: 'Categorías', icon: 'shape', color: '#9C27B0', route: 'Categories' },
     { title: 'Libro de Ventas', icon: 'book', color: '#E91E63', route: 'SalesBookScreen' },
     { title: 'Proveedores', icon: 'truck', color: '#2196F3', route: 'SuppliersScreen' },
+    { title: 'Compras', icon: 'cart-plus', color: '#4CAF50', route: 'PurchaseScreen' },
     { title: 'Cierre de Caja', icon: 'cash-register', color: '#FF9800', route: 'CashCloseScreen' },
-    { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'Reports' },
+    { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'ReportsScreen' },
     { title: 'Configuración', icon: 'cog', color: '#455A64', route: 'Settings' },
     { title: 'Salir', icon: 'logout', color: '#F44336', route: 'Logout' },
   ];

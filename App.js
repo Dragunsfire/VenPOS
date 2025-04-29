@@ -21,6 +21,10 @@ import CashCloseScreen from './screens/CashCloseScreen';
 import SalesBookScreen from './screens/SalesBookScreen';
 import SuppliersScreen from './screens/SuppliersScreen';
 import NewSuplierScreen from './screens/NewSupliersScreen';
+import ReportsScreen from './screens/ReportsScreen';
+import PurchaseScreen from './screens/PurchaseScreen';
+import SettingScreen from './screens/SettingScreen';
+import PaymentScreen from './screens/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +47,10 @@ export default function App() {
             <Stack.Screen name="SalesBookScreen" component={SalesBookScreen} />
             <Stack.Screen name="SuppliersScreen" component={SuppliersScreen} />
             <Stack.Screen name="NewSuplierScreen" component={NewSuplierScreen} />
+            <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
+            <Stack.Screen name="ReportsScreen" component={ReportsScreen} />   
+            <Stack.Screen name="Settings" component={SettingScreen} />
+            <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
           </Stack.Navigator>
           <Toaster />
         </NavigationContainer>
