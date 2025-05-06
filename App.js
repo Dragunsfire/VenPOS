@@ -33,7 +33,7 @@ export default function App() {
     <SafeAreaProvider style={styles.container}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
+          <Stack.Navigator  screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
