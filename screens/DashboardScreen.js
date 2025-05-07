@@ -11,15 +11,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LineChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [selectedCurrency, setSelectedCurrency] = useState('VES');
   const exchangeRate = 80.90;
 
+  const { nombre, rol } = useSelector(state => state.user);
+  
   const operator = {
-    name: 'Wilfredo Garcia',
-    role: 'Cajero Principal',
+    name: nombre || 'Usuario',
+    role: rol || 'Sin rol',
     id: 'OP001',
   };
 

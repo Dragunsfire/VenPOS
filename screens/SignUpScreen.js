@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { registerUser } from '../services/authServices';
 
 export default function SignUpScreen({ navigation }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -241,9 +242,15 @@ export default function SignUpScreen({ navigation }) {
             ) : (
               <TouchableOpacity
                 style={[styles.button, styles.nextButton]}
-                onPress={() => {
-                  handleSignUp();
-                  navigation.navigate('Dashboard');
+                onPress={async () => {
+                  const result = await registerUser(formData);
+                    if (result.ok) {
+                      console.log('Usuario registrado correctamente:', result.data);
+                      navigation.navigate('Dashboard');
+                    } else {
+                      toast.error(result.error || (result.data && result.data.message) || 'Error al registrar usuario');
+                      console.log('Error detalle:', result);
+                    }
                 }}
               >
                 <Text style={styles.buttonText}>Registrar</Text>

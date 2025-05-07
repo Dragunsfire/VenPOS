@@ -1,44 +1,87 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# Dependencias
+/node_modules
+/.pnp
+.pnp.js
 
-# dependencies
-node_modules/
+# Entorno de desarrollo
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Expo
 .expo/
 dist/
 web-build/
 expo-env.d.ts
-
-# Native
-*.orig.*
+.expo-shared/
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+*.orig.*
+web-build/
 
-# Metro
-.metro-health-check*
+# Native
+*.pem
+*.der
+*.keystore
+!debug.keystore
 
-# debug
+# Debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.log
 
-# macOS
+# Sistema Operativo
 .DS_Store
-*.pem
+Thumbs.db
 
-# local env files
-.env*.local
-.env
-.
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 
-# git
-.gitignore
+# Build
+/build
+/dist
+.next/
+out/
 
-# Windsurf
-.windsurfrules
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Testing
+/coverage
+/__tests__/__snapshots__/
+
+# Paquetes
+*.pkg
+*.tgz
+
+# Misc
+*.bak
+*.backup
+*~
+*.swo
+*.swp
+*.tmp
+*.temp
+.idea
+.vscode
+*.sublime-*
+*.code-workspace
+.history
+.vercel
+.netlify
+.turbo

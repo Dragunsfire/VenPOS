@@ -3,11 +3,14 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { toast } from 'sonner-native';
-import { supabase } from '../utils/supabase';
+import { loginUser } from '../services/authServices';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/userSlice';
 
 export default function HomeScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -15,47 +18,30 @@ export default function HomeScreen({ navigation }) {
       return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await loginUser({
       email,
       password,
     });
 
     if (error) {
-      toast.error('Correo o contraseña incorrectos');
-      console.log('❌ Error:', error.message);
-    } else {
-      const userEmail = data.user.email;
-      toast.success(`Bienvenido ${userEmail}`);
-      console.log('✅ Usuario autenticado:', data.user);
-      //navigation.navigate('Welcome', { userEmail });
+      toast.error(error);
+      console.log('❌ Error:', error);
+      return;
+    }
+
+    console.log('✅ Respuesta de login:', data);
+    // Ahora validamos nombre y rol
+    if (data && data.nombre && data.rol) {
+      toast.success(`Bienvenido ${data.nombre} (${data.rol})`);
+      dispatch(loginSuccess({ nombre: data.nombre, rol: data.rol }));
       navigation.navigate('Dashboard');
+    } else {
+      toast.error('No se pudo obtener los datos del usuario');
+      console.log('❌ data inválido:', data);
     }
   };
 
-  // DEBUG DE CONEXIÓN A SUPABASE Y PRUEBA DE RPC
-  useEffect(() => {
-    const testConnection = async () => {
-      try {
-        // Verificar sesión
-        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) {
-          console.log('❌ Error al obtener sesión:', sessionError.message);
-        } else {
-          console.log('✅ Supabase conectado. Sesión:', sessionData);
-        }
-        // Llamar función RPC
-        const { data: rpcData, error: rpcError } = await supabase.rpc('select_2_plus_2');
-        if (rpcError) {
-          console.error('❌ Error ejecutando select_2_plus_2:', rpcError.message);
-        } else {
-          console.log('📊 Resultado de select_2_plus_2:', rpcData[0]?.result);
-        }
-      } catch (error) {
-        console.error('⚠️ Error general:', error);
-      }
-    };
-    testConnection();
-  }, []);
+
 
   return (
     <SafeAreaView style={styles.container}>

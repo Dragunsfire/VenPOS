@@ -28,34 +28,39 @@ import PaymentScreen from './screens/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 export default function App() {
   return (
-    <SafeAreaProvider style={styles.container}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator  screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="Dashboard" component={DashboardScreen} />
-            <Stack.Screen name="SellScreen" component={SellScreen} />
-            <Stack.Screen name="CartScreen" component={CartScreen} />
-            <Stack.Screen name="ProductSelectionScreen" component={ProductSelectionScreen} />
-            <Stack.Screen name="InventoryScreen" component={InventoryScreen} />
-            <Stack.Screen name="NewCustomer" component={NewCustomerScreen} />
-            <Stack.Screen name="NewProductScreen" component={NewProductScreen} />
-            <Stack.Screen name="CashCloseScreen" component={CashCloseScreen} />
-            <Stack.Screen name="SalesBookScreen" component={SalesBookScreen} />
-            <Stack.Screen name="SuppliersScreen" component={SuppliersScreen} />
-            <Stack.Screen name="NewSuplierScreen" component={NewSuplierScreen} />
-            <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
-            <Stack.Screen name="ReportsScreen" component={ReportsScreen} />   
-            <Stack.Screen name="Settings" component={SettingScreen} />
-            <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
-          </Stack.Navigator>
-          <Toaster />
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider style={styles.container}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack.Navigator  screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+              <Stack.Screen name="Dashboard" component={DashboardScreen} />
+              <Stack.Screen name="SellScreen" component={SellScreen} />
+              <Stack.Screen name="CartScreen" component={CartScreen} />
+              <Stack.Screen name="ProductSelectionScreen" component={ProductSelectionScreen} />
+              <Stack.Screen name="InventoryScreen" component={InventoryScreen} />
+              <Stack.Screen name="NewCustomer" component={NewCustomerScreen} />
+              <Stack.Screen name="NewProductScreen" component={NewProductScreen} />
+              <Stack.Screen name="CashCloseScreen" component={CashCloseScreen} />
+              <Stack.Screen name="SalesBookScreen" component={SalesBookScreen} />
+              <Stack.Screen name="SuppliersScreen" component={SuppliersScreen} />
+              <Stack.Screen name="NewSuplierScreen" component={NewSuplierScreen} />
+              <Stack.Screen name="PurchaseScreen" component={PurchaseScreen} />
+              <Stack.Screen name="ReportsScreen" component={ReportsScreen} />   
+              <Stack.Screen name="Settings" component={SettingScreen} />
+              <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+            </Stack.Navigator>
+            <Toaster />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
