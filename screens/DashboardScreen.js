@@ -90,7 +90,7 @@ export default function HomeScreen() {
     { title: 'Reportes', icon: 'chart-bar', color: '#607D8B', route: 'ReportsScreen' },
     { title: 'Bancos', icon: 'bank', color: '#4CAF50', route: 'BankConfiguration' },
     { title: 'Configuración', icon: 'cog', color: '#455A64', route: 'Settings' },
-    { title: 'Salir', icon: 'logout', color: '#F44336', route: 'Logout' },
+    { title: 'Salir', icon: 'logout', color: '#F44336', route: 'Home' },
   ];
 
   return (
